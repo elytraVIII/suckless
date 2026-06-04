@@ -10,6 +10,8 @@ This repository contains custom builds of various suckless tools and system util
 - **[dmenu](dmenu/)**: Dynamic Menu
   - Upstream: `https://git.suckless.org/dmenu`
   - Customizations: Font sizes, Tokyo Night colors.
+- **[dmenu-tuned](dmenu-tuned/)**: Custom power profiles switcher
+  - Integrates `tuned-adm` power management profiles directly with a C-based `dmenu` interface.
 - **[slstatus](slstatus/)**: Status Monitor for dwm
   - Upstream: `https://git.suckless.org/slstatus`
   - Customizations: CPU, RAM, Volume, and Date/Time formatting.
@@ -17,6 +19,10 @@ This repository contains custom builds of various suckless tools and system util
   - Upstream: `https://git.suckless.org/slock`
   - Customizations: Tokyo Night colors, User/Group dropping, Ctrl-U password clearing.
 - **[dmenu-powermenu](dmenu-powermenu/)**: Custom power menu script.
+
+## ⌨️ Keybindings
+
+A complete reference of all shortcuts and mouse actions is available in [keybindings.md](keybindings.md).
 
 ## Setup and Installation
 

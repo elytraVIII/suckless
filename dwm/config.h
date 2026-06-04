@@ -69,6 +69,7 @@ static const char *yazicmd[]    = { "alacritty", "-e", "env", "yazi", NULL };
 static const char *bluecmd[]    = { "alacritty", "-e", "bluetui", NULL };
 static const char *nvimcmd[]    = { "alacritty", "-e", "nvim", NULL };
 static const char *powermenucmd[] = { "dmenu-powermenu", NULL };
+static const char *tunedcmd[]     = { "dmenu-tuned", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -129,6 +130,7 @@ static const Key keys[] = {
 
 	/* Session / DWM control */
 	{ MODKEY|ShiftMask,             XK_Escape, spawn,          {.v = powermenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = tunedcmd } },
 	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
 };
 

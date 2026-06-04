@@ -1,0 +1,3 @@
+dmenu-tuned
+*.o
+config.h
