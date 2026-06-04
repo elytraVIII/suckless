@@ -1,0 +1,16 @@
+# Ignore object files and build artifacts
+*.o
+
+# Ignore compiled binaries
+/dwm/dwm
+/dmenu/dmenu
+/dmenu/stest
+/slstatus/slstatus
+/slock/slock
+/dmenu-powermenu/dmenu-powermenu
+
+# OS/Editor temporary files
+.DS_Store
+*~
+*.swp
+*.swo
