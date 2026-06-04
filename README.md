@@ -19,6 +19,8 @@ This repository contains custom builds of various suckless tools and system util
   - Upstream: `https://git.suckless.org/slock`
   - Customizations: Tokyo Night colors, User/Group dropping, Ctrl-U password clearing.
 - **[dmenu-powermenu](dmenu-powermenu/)**: Custom power menu script.
+- **[dmenu-screenshot](dmenu-screenshot/)**: Custom screenshot manager
+  - Integrates `maim`, `xclip`, and X11 APIs to capture screenshots (Fullscreen, active window, active monitor, or selection) via a `dmenu` interface.
 
 ## ⌨️ Keybindings
 

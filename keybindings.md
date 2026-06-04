@@ -76,18 +76,15 @@ There are 9 tags (`I` through `IX`).
 | `Super + F11` | Lower Volume | `wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-` |
 | `Super + F10` | Toggle Mute | `wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle` |
 
----
 
 ## 📸 Screenshots
 
-Takes screenshots, saves them to `~/Pictures/Screenshots/`, and copies them to the system clipboard. (Requires `maim`, `slop`, and `xclip` to be installed).
-
 | Keybinding | Action | Description |
 | :--- | :--- | :--- |
-| `Print` | Full Screenshot | Captures the entire screen |
-| `Shift + Print` | Region Screenshot | Interactively select a region or window to capture |
+| `Print` | Screenshot Menu | Launch `dmenu-screenshot` to choose a mode (Fullscreen, Active Window, Active Monitor, or Selection) |
 
 ---
+
 
 ## 💻 Monitor Management
 

@@ -114,10 +114,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F12,    spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+") },
 	{ MODKEY,                       XK_F11,    spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") },
 	{ MODKEY,                       XK_F10,    spawn,          SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") },
-
 	/* Screenshots */
-	{ 0,                            XK_Print,  spawn,          SHCMD("mkdir -p ~/Pictures/Screenshots && f=~/Pictures/Screenshots/$(date +%F_%H-%M-%S).png && maim \"$f\" && xclip -selection clipboard -t image/png -i \"$f\"") },
-	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("mkdir -p ~/Pictures/Screenshots && f=~/Pictures/Screenshots/$(date +%F_%H-%M-%S).png && maim -s \"$f\" && xclip -selection clipboard -t image/png -i \"$f\"") },
+	{ 0,                            XK_Print,  spawn,          SHCMD("dmenu-screenshot") },
 
 	/* Tags & Workspaces */
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
