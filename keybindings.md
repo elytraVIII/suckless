@@ -78,6 +78,17 @@ There are 9 tags (`I` through `IX`).
 
 ---
 
+## 📸 Screenshots
+
+Takes screenshots, saves them to `~/Pictures/Screenshots/`, and copies them to the system clipboard. (Requires `maim`, `slop`, and `xclip` to be installed).
+
+| Keybinding | Action | Description |
+| :--- | :--- | :--- |
+| `Print` | Full Screenshot | Captures the entire screen |
+| `Shift + Print` | Region Screenshot | Interactively select a region or window to capture |
+
+---
+
 ## 💻 Monitor Management
 
 For multi-monitor setups:
