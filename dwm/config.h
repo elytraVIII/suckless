@@ -50,11 +50,11 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+#define TAGKEYS(KEY,TAG)                                                                                               \
+       &((Keychord){1, {{MODKEY, KEY}},                                        view,           {.ui = 1 << TAG} }), \
+       &((Keychord){1, {{MODKEY|ControlMask, KEY}},                            toggleview,     {.ui = 1 << TAG} }), \
+       &((Keychord){1, {{MODKEY|ShiftMask, KEY}},                              tag,            {.ui = 1 << TAG} }), \
+       &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, KEY}},                  toggletag,      {.ui = 1 << TAG} }),
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -71,55 +71,58 @@ static const char *nvimcmd[]    = { "alacritty", "-e", "nvim", NULL };
 static const char *powermenucmd[] = { "dmenu-powermenu", NULL };
 static const char *tunedcmd[]     = { "dmenu-tuned", NULL };
 
-static const Key keys[] = {
-	/* modifier                     key        function        argument */
+static Keychord *keychords[] = {
+	/* Keys        function        argument */
 
 	/* Applications / Launchers */
-	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd } },
-	{ MODKEY,                       XK_v,      spawn,          {.v = vacuumcmd } },
-	{ MODKEY,                       XK_y,      spawn,          {.v = yazicmd } },
-	{ MODKEY|ControlMask,           XK_b,      spawn,          {.v = bluecmd } },
-	{ MODKEY,                       XK_n,      spawn,          {.v = nvimcmd } },
+	&((Keychord){1, {{MODKEY, XK_r}},      spawn,          {.v = dmenucmd } }),
+	&((Keychord){1, {{MODKEY, XK_Return}}, spawn,          {.v = termcmd } }),
+	&((Keychord){1, {{MODKEY, XK_b}},      spawn,          {.v = browsercmd } }),
+	&((Keychord){1, {{MODKEY, XK_v}},      spawn,          {.v = vacuumcmd } }),
+	&((Keychord){1, {{MODKEY, XK_y}},      spawn,          {.v = yazicmd } }),
+	&((Keychord){1, {{MODKEY|ControlMask, XK_b}},      spawn,          {.v = bluecmd } }),
+	&((Keychord){1, {{MODKEY, XK_n}},      spawn,          {.v = nvimcmd } }),
+
+	/* Example Keychord: MODKEY+Shift+x, then e -> launches browser */
+	&((Keychord){2, {{MODKEY|ShiftMask, XK_x}, {0, XK_e}}, spawn,          {.v = browsercmd } }),
 
 	/* Windows Focus & Stack Navigation */
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_q,      killclient,     {0} },
+	&((Keychord){1, {{MODKEY, XK_j}},      focusstack,     {.i = +1 } }),
+	&((Keychord){1, {{MODKEY, XK_k}},      focusstack,     {.i = -1 } }),
+	&((Keychord){1, {{MODKEY, XK_Return}}, zoom,           {0} }),
+	&((Keychord){1, {{MODKEY, XK_Tab}},    view,           {0} }),
+	&((Keychord){1, {{MODKEY, XK_q}},      killclient,     {0} }),
 
 	/* Layout Adjustments */
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
+	&((Keychord){1, {{MODKEY, XK_i}},      incnmaster,     {.i = +1 } }),
+	&((Keychord){1, {{MODKEY, XK_d}},      incnmaster,     {.i = -1 } }),
+	&((Keychord){1, {{MODKEY, XK_h}},      setmfact,       {.f = -0.05} }),
+	&((Keychord){1, {{MODKEY, XK_l}},      setmfact,       {.f = +0.05} }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_space}},  togglefloating, {0} }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_b}},      togglebar,      {0} }),
 
 	/* Layout Modes */
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	&((Keychord){1, {{MODKEY, XK_t}},      setlayout,      {.v = &layouts[0]} }),
+	&((Keychord){1, {{MODKEY, XK_f}},      setlayout,      {.v = &layouts[1]} }),
+	&((Keychord){1, {{MODKEY, XK_m}},      setlayout,      {.v = &layouts[2]} }),
+	&((Keychord){1, {{MODKEY, XK_space}},  setlayout,      {0} }),
 
 	/* Monitor Navigation / Routing */
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	&((Keychord){1, {{MODKEY, XK_comma}},  focusmon,       {.i = -1 } }),
+	&((Keychord){1, {{MODKEY, XK_period}}, focusmon,       {.i = +1 } }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_comma}},  tagmon,         {.i = -1 } }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_period}}, tagmon,         {.i = +1 } }),
 
 	/* Volume / Media Control */
-	{ MODKEY,                       XK_F12,    spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+") },
-	{ MODKEY,                       XK_F11,    spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") },
-	{ MODKEY,                       XK_F10,    spawn,          SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") },
+	&((Keychord){1, {{MODKEY, XK_F12}},    spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+") }),
+	&((Keychord){1, {{MODKEY, XK_F11}},    spawn,          SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") }),
+	&((Keychord){1, {{MODKEY, XK_F10}},    spawn,          SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") }),
 	/* Screenshots */
-	{ 0,                            XK_Print,  spawn,          SHCMD("dmenu-screenshot") },
+	&((Keychord){1, {{0, XK_Print}},       spawn,          SHCMD("dmenu-screenshot") }),
 
 	/* Tags & Workspaces */
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	&((Keychord){1, {{MODKEY, XK_0}},      view,           {.ui = ~0 } }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_0}},     tag,            {.ui = ~0 } }),
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -131,9 +134,9 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 
 	/* Session / DWM control */
-	{ MODKEY|ShiftMask,             XK_Escape, spawn,          {.v = powermenucmd } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = tunedcmd } },
-	{ MODKEY|ShiftMask,             XK_c,      quit,           {0} },
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_Escape}}, spawn,          {.v = powermenucmd } }),
+	&((Keychord){1, {{MODKEY, XK_p}},      spawn,          {.v = tunedcmd } }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_c}},      quit,           {0} }),
 };
 
 /* button definitions */
